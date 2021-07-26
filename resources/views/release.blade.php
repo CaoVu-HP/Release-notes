@@ -465,7 +465,7 @@
 </head>
 <body class="antialiased">
 <div
-    class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    class="d-flex justify-content-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
     @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
@@ -501,7 +501,7 @@
                 @foreach($allVersion as $version)
                     <div class="card">
                         <h2 class="title">{{$version->name}}</h2>
-                        <p class="desc">  {{$version->content}}</p>
+                        <p class="desc">  {!!$version->content!!}</p>
                         <hr class="line">
                         <p> Author: {{$version->author}}</p>
                         <p> Release Time: {{$version->time}}</p>
