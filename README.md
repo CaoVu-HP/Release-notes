@@ -13,6 +13,14 @@ Open your favorite Terminal and run these commands.
 Run Tab:
 
 ```sh
+php artisan key:generate
+```
+
+```sh
+php artisan config:cache
+```
+
+```sh
 composer install
 ```
 
