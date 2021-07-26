@@ -13,6 +13,14 @@ Open your favorite Terminal and run these commands.
 Run Tab:
 
 ```sh
+composer install
+```
+
+```sh
+npm install
+```
+
+```sh
 php artisan key:generate
 ```
 
@@ -20,13 +28,6 @@ php artisan key:generate
 php artisan config:cache
 ```
 
-```sh
-composer install
-```
-
-```sh
-npm install
-```
 
 ```sh
 php artisan serve 
