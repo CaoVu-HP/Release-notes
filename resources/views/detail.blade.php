@@ -377,20 +377,14 @@
                 <div class="card">
                     <h2 class="title">{{$singleVersion->name}} released</h2>
                     <p class="blue"> {{$singleVersion->time}}</p>
-                    <p class="desc"><b>{{$singleVersion->content}}</b></p>
+                    <p class="desc"><b>{!!$singleVersion->content!!}</b></p>
                     <hr class="line">
                     <h3> Added </h3>
                     <hr class="line">
-                    @php($i=1)
-                    @foreach($singleVersion->added as $version)
-                        <li>Added <a style="background: rgba(109,114,253,0.31)">{{$version}}</a></li>
-                    @endforeach
+
                     <h3> Changed </h3>
                     <hr class="line">
-                    @php($i=1)
-                    @foreach($singleVersion->changed as $version)
-                        <li>{{$version}}</li>
-                    @endforeach
+
                     <h3> New Methods </h3>
                     <hr class="line">
                     <pre class="pre"><code class="language-php hljs" ><span class="hljs-comment">// Retrieve card payment methods on a user...</span>
