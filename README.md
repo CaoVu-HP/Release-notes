@@ -9,12 +9,14 @@
 Change env.example -> .env
 
 in .env 
+```sh
 DB_CONNECTION=mongodb
 DB_HOST=localhost
 DB_PORT=27017
 DB_DATABASE= // name of ur database
 DB_USERNAME=
 DB_PASSWORD=
+```
 
 Open your favorite Terminal and run these commands.
 
