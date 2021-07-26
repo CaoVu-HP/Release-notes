@@ -6,6 +6,8 @@
 
 ## How to run this Application
 
+Change env.example -> .env
+
 Open your favorite Terminal and run these commands.
 
 Run Tab:
