@@ -15,8 +15,8 @@ class CreateVersionsTable extends Migration
     {
         Schema::create('versions', function (Blueprint $table) {
             $table->string('name');
-            $table->string('content')->unique();
-            $table->timestamp('author')->nullable();
+            $table->string('department');
+            $table->timestamp('position')->nullable();
             $table->string('time');
             $table->timestamps();
         });

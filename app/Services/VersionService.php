@@ -1,7 +1,10 @@
 <?php
 namespace App\Services;
+use App\Models\Department;
 use App\Models\Version;
 use App\Repositories\VersionRepository;
+use Intervention\Image\Facades\Image;
+use Symfony\Component\Console\Input\Input;
 
 class VersionService
 {
@@ -21,20 +24,29 @@ class VersionService
         return $this->versionRepository->getAllVersion();
     }
 
+    public function searchVersions($param)
+    {
+        return $this->versionRepository->searchVersions($param);
+    }
     public function insert($param)
     {
          $param->validate([
             'name' => 'required',
-            'content' => 'required',
-            'author' => 'required',
-            'time' => 'required'
+            'department' => 'required',
+            'position' => 'required',
+            'time' => 'required',
+             'image' => '',
                                     ]);
+            $imagePath = (\request('image')->store('uploads', 'public'));
+            $image=Image::make(public_path("storage/{$imagePath}"))->fit(100,100);
+            $image->save();
             $version = new Version();
             $version ->name  =$param ['name'];
-            $version ->content  =$param['content'];
-            $version ->author =$param ['author'];
+            $version ->department  =$param['department'];
+            $version ->position =$param ['position'];
             $version ->time =$param ['time'];
-        return  $this->versionRepository->insert($version);
+            $version->image=$imagePath;
+            $this->versionRepository->insert($version);
     }
 
     public function findVersion($id)
@@ -49,12 +61,27 @@ class VersionService
 
     public function saveVersion( $param)
     {
+        request()->validate(
+            [
+                'image' => '',
+            ]
+        );
+        if(request('image')){
+            $imagePath = (\request('image')->store('uploads', 'public'));
+            $image=Image::make(public_path("storage/{$imagePath}"))->fit(100,100);
+            $image->save();
+        }
         $version=Version::find($param->id);
+        $oldDepartment=Department::where('name',$version->department)->first();
+        if(request('image')){
+            $version->image = $imagePath;
+        }
         $version ->name  =$param ['name'];
-        $version ->content  =$param ['content'];
-        $version ->author =$param ['author'];
+        $version ->department  =$param['department'];
+        $version ->position =$param ['position'];
         $version ->time =$param ['time'];
-        return  $this->versionRepository->insert($version);
+
+        $this->versionRepository->update($version,$oldDepartment);
     }
 
     public function delete($param)

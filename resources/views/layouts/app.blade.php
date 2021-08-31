@@ -54,9 +54,11 @@
                             @endif
                         @else
                             <li class="nav-item dropdown" style="display: flex; margin-right: 20px;">
-
+                                <a class="navbar-brand" href="{{ route('departments') }}">
+                                    {{ 'Department' }}
+                                </a>
                                 <a class="navbar-brand" href="{{ route('version') }}">
-                                    {{ 'Release' }}
+                                    {{ 'Manage User' }}
                                 </a>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

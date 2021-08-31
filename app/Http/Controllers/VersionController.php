@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\Version;
 use Session;
@@ -19,20 +20,32 @@ class VersionController extends Controller
         $this->versionService = $versionService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $versions=$this->versionService->getAllVersion();
-        return view('version.version',['allVersion'=>$versions]);
+        $department=Department::all()->pluck('name');
+        if(count($request->all()) == 0)
+        {
+            $versions=$this->versionService->getAllVersion();
+            return view('version.version',['allVersion'=>$versions],compact('department'));
+        }else
+        {
+            $allVersion=$this->versionService->searchVersions($request->get('name'));
+            return view('version.version',compact('allVersion','department'));
+        }
+
     }
+
     public function insert(Request $request)
     {
+
         $this->versionService->insert($request);
         return redirect('/versions')->with('message','Version has been created successfully');
     }
     public function edit($id)
     {
+        $department=Department::all()->pluck('name');
         $version=$this->versionService->findVersion($id);
-        return view('version.versionEdit',['singleVersion'=>$version]);
+        return view('version.versionEdit',['singleVersion'=>$version],compact('department'));
     }
     public function update( Request $request)
     {

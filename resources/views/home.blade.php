@@ -8,7 +8,6 @@
         <div class="col-md-12">
             <div class="card ">
                 <div class="card-header">{{ __('You are logged in !!!') }}</div>
-
         </div>
     </div>
 </div>
